@@ -1,0 +1,10 @@
+{
+    "name": "weather-prediction-ml-model-analysis",
+    "repository": "https://github.com/rhutikcodes/weather-prediction-ml-model-analysis",
+    "env": {
+    },
+    "buildpacks": [{
+        "url": "heroku/python"
+    }]
+
+}
