@@ -1,4 +1,5 @@
 import flask
+import os
 from sklearn.metrics import accuracy_score
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import LabelEncoder
@@ -14,7 +15,7 @@ import tensorflow as tf
 import numpy as np  # linear algebra
 import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 from sklearn.ensemble import RandomForestClassifier
-
+port = int(os.getenv('PORT', 33507))
 
 # flask
 app = flask.Flask(__name__)
@@ -57,11 +58,15 @@ x_train, x_test, y_train, y_test = train_test_split(
     x, y, test_size=0.2, random_state=0)
 
 # Just for testing :)
+
+
 @app.route('/hello', methods=['GET'])
 def hello_world():
     return "Hello World"
 
 # Random Forest
+
+
 @app.route('/randomForest', methods=['GET'])
 def train_random_forest():
     print('training Random Forest')
@@ -75,6 +80,8 @@ def train_random_forest():
     return dict_a
 
 # Logistic Regression
+
+
 @app.route('/logisticRegression', methods=['GET'])
 def train_logistic_regression():
     print('training logistic Regression')
@@ -87,6 +94,8 @@ def train_logistic_regression():
     return dict_a
 
 # Naive Bayes
+
+
 @app.route('/naiveBayes', methods=['GET'])
 def train_naive_bayes():
     print('training naive bayes')
@@ -99,6 +108,8 @@ def train_naive_bayes():
     return dict_a
 
 # Support Vector Machine
+
+
 @app.route('/supportVectorMachine', methods=['GET'])
 def train_svm():
     print('training svm')
@@ -111,6 +122,8 @@ def train_svm():
     return dict_a
 
 # Artificial Neural Network
+
+
 @app.route('/artificialNeuralNetwork', methods=['GET'])
 def train_ann():
     print('training ann')
@@ -129,10 +142,12 @@ def train_ann():
     return dict_a
 
 # handle all exceptions
+
+
 @app.errorhandler(Exception)
 def all_exception_handler(error):
     return 'Internal Error', 500
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=port)
