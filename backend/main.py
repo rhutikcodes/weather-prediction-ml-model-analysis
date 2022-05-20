@@ -1,4 +1,5 @@
 import flask
+from flask_cors import CORS
 import os
 from sklearn.metrics import accuracy_score
 from sklearn.impute import SimpleImputer
@@ -20,6 +21,7 @@ port = int(os.getenv('PORT', 33507))
 # flask
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
+CORS(app)
 
 #import dataset
 df_raw = pd.read_csv('backend/weatherAUS.csv')
