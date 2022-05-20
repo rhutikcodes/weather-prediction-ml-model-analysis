@@ -57,7 +57,10 @@ class CircularParticleScreen extends StatelessWidget {
                             Center(
                           child: Text(
                             value['name'],
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
@@ -79,7 +82,9 @@ class CircularParticleScreen extends StatelessWidget {
                               Center(
                         child: Text(
                           "Accuracy: ${value['accuracy']} \n\n ${value['name']}",
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       )),
@@ -89,6 +94,7 @@ class CircularParticleScreen extends StatelessWidget {
                 },
               );
               return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: rows,
               );
             }),
@@ -96,45 +102,47 @@ class CircularParticleScreen extends StatelessWidget {
         ),
         Positioned(
           bottom: 40,
-          child: Row(
-            children: [
-              AnimatedButton(
-                child: const Text(
-                  'Train All',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+          child: Center(
+            child: Row(
+              children: [
+                AnimatedButton(
+                  child: const Text(
+                    'Train All',
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
+                  color: Colors.cyan,
+                  onPressed: () {
+                    Provider.of<TrainingProvider>(context, listen: false)
+                        .trainAll();
+                  },
                 ),
-                color: Colors.cyan,
-                onPressed: () {
-                  Provider.of<TrainingProvider>(context, listen: false)
-                      .trainAll();
-                },
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              AnimatedButton(
-                child: const Text(
-                  'Show Result',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                const SizedBox(
+                  width: 20,
+                ),
+                AnimatedButton(
+                  child: const Text(
+                    'Show Result',
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                color: Colors.cyan,
-                onPressed: () async {
-                  var modelData = await Provider.of<TrainingProvider>(context,
-                          listen: false)
-                      .getTrainedData();
+                  color: Colors.cyan,
+                  onPressed: () async {
+                    var modelData = await Provider.of<TrainingProvider>(context,
+                            listen: false)
+                        .getTrainedData();
 
-                  Logger().e(modelData);
-                },
-              ),
-            ],
+                    Logger().e(modelData);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -161,7 +169,7 @@ class ModelItem extends StatelessWidget {
           height: 20,
         ),
         AnimatedButton(
-          width: 250,
+          width: MediaQuery.of(context).size.height / 4,
           child: const Text(
             'Train',
             style: TextStyle(
@@ -190,8 +198,8 @@ class ModelBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 250,
-        width: 250,
+        height: MediaQuery.of(context).size.height / 4,
+        width: MediaQuery.of(context).size.height / 4,
         margin: const EdgeInsets.symmetric(horizontal: 50),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
