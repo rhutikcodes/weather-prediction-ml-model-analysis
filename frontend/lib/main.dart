@@ -1,10 +1,10 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 import 'package:particles_flutter/particles_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/provider/training_provider.dart';
+import 'package:weather_app/views/show_result_screen.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -134,11 +134,11 @@ class CircularParticleScreen extends StatelessWidget {
                   ),
                   color: Colors.cyan,
                   onPressed: () async {
-                    var modelData = await Provider.of<TrainingProvider>(context,
-                            listen: false)
-                        .getTrainedData();
-
-                    Logger().e(modelData);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const ShowResultScreen()));
                   },
                 ),
               ],
